@@ -80,8 +80,8 @@ void associated_data(bit64 state[5], int length, bit64 associated_data_text[]) {
 }
 
 void finalization(bit64 state[5], bit64 key[2]) {
-   state[0] ^= key[0];
-   state[1] ^= key[1];
+   state[1] ^= key[0];
+   state[2] ^= key[1];
    p(state, 12);
    state[3] ^= key[0];
    state[4] ^= key[1];
@@ -109,11 +109,11 @@ void decrypt(bit64 state[5], int length, bit64 plaintext[], bit64 ciphertext[]){
 
 int main() {
    // initialize nonce, key and IV
-   bit64 nonce[2] = { 0 };
+   bit64 nonce[2] = { 0x0000000000000001, 0x0000000000000002 };
    bit64 key[2] = { 0 };
    bit64 IV = 0x80400c0600000000;
-   bit64 plaintext[] = {0x1234567890abcdef, 0x82187};
-   bit64 ciphertext[10] = { 0 };
+   bit64 plaintext[] = {0x1234567890abcdef, 0x1234567890abcdef};
+   bit64 ciphertext[2] = { 0 };
    bit64 associated_data_text[] = { 0x787878, 0x878787, 0x09090};
 
    //encryption
@@ -134,8 +134,11 @@ int main() {
 
 
    //decryption
-
-   bit64 ciphertextdecrypt[] = { 0x2c8392866adf7449, 0x3fbb0fc0a60e66da };
+        
+   bit64 ciphertextdecrypt[2] = {0};
+   for(int i = 0; i < 2; i++){
+      ciphertextdecrypt[i] = ciphertext[i];
+   }
    bit64 plaintextdecrypt[10] = { 0 };
 
    //initialize state
