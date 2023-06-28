@@ -1,4 +1,4 @@
-# Ascon Implementation in C
+# Ascon Implementation in C3
 ASCON is a state-of-the-art authenticated encryption algorithm designed specifically for the Internet of Things (IoT). It has been designed to provide high-security while also being lightweight and efficient, making it ideal for use in IoT devices with limited resources.
 
 ASCON has recently been named as a finalist in the National Institute of Standards and Technology (NIST) competition for a new standard for authenticated encryption. The winner of this competition will be announced in the fall of 2022.
